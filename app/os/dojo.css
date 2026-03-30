@@ -1,0 +1,522 @@
+/* ─── Mateusz OS — Dojo Theme ──────────────────────────────────────────────── */
+
+:root {
+  --void: #080808;
+  --floor: #0F0F0F;
+  --wall: #161616;
+  --border: #1E1E1E;
+  --border-lit: #2A2A2A;
+  --paper: #E8E0D0;
+  --ash: #555555;
+  --steel: #888888;
+  --blood: #8B1A1A;
+  --fire: #B22222;
+  --fire-bright: #E03030;
+  --gold: #9A7A0C;
+  --gold-bright: #C4A020;
+  --jade: #2A6B3A;
+  --jade-bright: #3D9A56;
+  --cobalt: #1A3A6B;
+  --cobalt-bright: #2A5A9A;
+  --season-spring: #5A8A3A;
+  --season-summer: #9A7A0C;
+  --season-autumn: #8B3A0C;
+  --season-winter: #2A4A6B;
+  --font-head: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+/* ─── Reset for OS scope ──────────────────────────────────────────────────── */
+.dojo-root {
+  position: fixed;
+  inset: 0;
+  background: var(--void);
+  color: var(--paper);
+  font-family: var(--font-head);
+  font-size: 13px;
+  line-height: 1.5;
+  display: flex;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* ─── Sidebar ─────────────────────────────────────────────────────────────── */
+.dojo-sidebar {
+  width: 56px;
+  background: var(--floor);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.dojo-sidebar-logo {
+  width: 32px;
+  height: 32px;
+  background: var(--blood);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--paper);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.dojo-nav-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: transparent;
+  border: none;
+  color: var(--ash);
+  font-size: 18px;
+  position: relative;
+}
+
+.dojo-nav-item:hover {
+  background: var(--wall);
+  color: var(--steel);
+}
+
+.dojo-nav-item.active {
+  background: var(--wall);
+  color: var(--paper);
+}
+
+.dojo-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 20px;
+  background: var(--fire);
+  border-radius: 0 1px 1px 0;
+}
+
+.dojo-nav-item[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--wall);
+  border: 1px solid var(--border-lit);
+  color: var(--paper);
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 11px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  z-index: 100;
+}
+
+.dojo-nav-item[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+.dojo-sidebar-spacer {
+  flex: 1;
+}
+
+/* ─── Main content ────────────────────────────────────────────────────────── */
+.dojo-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Top bar ─────────────────────────────────────────────────────────────── */
+.dojo-topbar {
+  height: 44px;
+  background: var(--floor);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.dojo-topbar-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+
+.dojo-topbar-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border-lit);
+}
+
+.dojo-stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.dojo-stat-chip-label {
+  color: var(--ash);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.dojo-stat-chip-value {
+  color: var(--paper);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dojo-stat-chip-value.fire { color: var(--fire-bright); }
+.dojo-stat-chip-value.gold { color: var(--gold-bright); }
+.dojo-stat-chip-value.jade { color: var(--jade-bright); }
+
+.dojo-topbar-spacer { flex: 1; }
+
+.dojo-topbar-date {
+  font-size: 11px;
+  color: var(--ash);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Content area ────────────────────────────────────────────────────────── */
+.dojo-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.dojo-content::-webkit-scrollbar { width: 4px; }
+.dojo-content::-webkit-scrollbar-track { background: transparent; }
+.dojo-content::-webkit-scrollbar-thumb { background: var(--border-lit); border-radius: 2px; }
+
+/* ─── Grid ────────────────────────────────────────────────────────────────── */
+.dojo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.dojo-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.dojo-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1100px) {
+  .dojo-grid { grid-template-columns: repeat(2, 1fr); }
+  .dojo-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ─── Cards / Modules ─────────────────────────────────────────────────────── */
+.dojo-card {
+  background: var(--floor);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  position: relative;
+}
+
+.dojo-card.span-2 { grid-column: span 2; }
+.dojo-card.span-3 { grid-column: span 3; }
+
+.dojo-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.dojo-card-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+
+.dojo-card-accent {
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.dojo-card-accent.blood { background: var(--fire); }
+.dojo-card-accent.gold { background: var(--gold-bright); }
+.dojo-card-accent.jade { background: var(--jade-bright); }
+.dojo-card-accent.cobalt { background: var(--cobalt-bright); }
+.dojo-card-accent.steel { background: var(--steel); }
+
+/* ─── Big number display ──────────────────────────────────────────────────── */
+.dojo-big-num {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+.dojo-big-num-unit {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--steel);
+  margin-left: 4px;
+}
+
+.dojo-big-num-delta {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.dojo-big-num-delta.up { color: var(--jade-bright); }
+.dojo-big-num-delta.down { color: var(--fire-bright); }
+
+/* ─── Progress bar ────────────────────────────────────────────────────────── */
+.dojo-bar-track {
+  height: 3px;
+  background: var(--border-lit);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.dojo-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.dojo-bar-fill.blood { background: var(--fire); }
+.dojo-bar-fill.gold { background: var(--gold-bright); }
+.dojo-bar-fill.jade { background: var(--jade-bright); }
+
+/* ─── Streak dots ─────────────────────────────────────────────────────────── */
+.dojo-week-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.dojo-week-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-lit);
+}
+
+.dojo-week-dot.done { background: var(--jade-bright); }
+.dojo-week-dot.today { background: var(--fire-bright); box-shadow: 0 0 6px var(--fire-bright); }
+
+/* ─── Table ───────────────────────────────────────────────────────────────── */
+.dojo-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dojo-table th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ash);
+  padding: 0 0 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.dojo-table td {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--steel);
+  vertical-align: top;
+}
+
+.dojo-table td:first-child { color: var(--paper); }
+
+.dojo-table tr:last-child td { border-bottom: none; }
+
+/* ─── Tag / badge ─────────────────────────────────────────────────────────── */
+.dojo-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.dojo-tag.blood { background: rgba(178, 34, 34, 0.15); color: var(--fire-bright); }
+.dojo-tag.gold { background: rgba(154, 122, 12, 0.15); color: var(--gold-bright); }
+.dojo-tag.jade { background: rgba(42, 107, 58, 0.15); color: var(--jade-bright); }
+.dojo-tag.steel { background: rgba(136, 136, 136, 0.1); color: var(--steel); }
+
+/* ─── Inline label/value pair ─────────────────────────────────────────────── */
+.dojo-kv {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0;
+}
+
+.dojo-kv + .dojo-kv { border-top: 1px solid var(--border); }
+
+.dojo-kv-key {
+  font-size: 11px;
+  color: var(--ash);
+}
+
+.dojo-kv-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Section heading ─────────────────────────────────────────────────────── */
+.dojo-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dojo-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── Button ──────────────────────────────────────────────────────────────── */
+.dojo-btn {
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.dojo-btn.primary {
+  background: var(--fire);
+  color: var(--paper);
+}
+
+.dojo-btn.primary:hover { background: var(--fire-bright); }
+
+.dojo-btn.ghost {
+  background: transparent;
+  border: 1px solid var(--border-lit);
+  color: var(--steel);
+}
+
+.dojo-btn.ghost:hover {
+  border-color: var(--steel);
+  color: var(--paper);
+}
+
+.dojo-btn.gold-btn {
+  background: rgba(154, 122, 12, 0.2);
+  border: 1px solid var(--gold);
+  color: var(--gold-bright);
+}
+
+/* ─── Alert banner ────────────────────────────────────────────────────────── */
+.dojo-alert {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  border-left: 3px solid;
+}
+
+.dojo-alert.warn {
+  background: rgba(178, 34, 34, 0.08);
+  border-color: var(--fire);
+  color: var(--fire-bright);
+}
+
+.dojo-alert.good {
+  background: rgba(42, 107, 58, 0.08);
+  border-color: var(--jade-bright);
+  color: var(--jade-bright);
+}
+
+/* ─── Chart container ─────────────────────────────────────────────────────── */
+.dojo-chart {
+  margin-top: 8px;
+}
+
+/* ─── Scrollable list ─────────────────────────────────────────────────────── */
+.dojo-scroll-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dojo-scroll-list::-webkit-scrollbar { width: 3px; }
+.dojo-scroll-list::-webkit-scrollbar-thumb { background: var(--border-lit); }
+
+/* ─── Input ───────────────────────────────────────────────────────────────── */
+.dojo-input {
+  background: var(--wall);
+  border: 1px solid var(--border-lit);
+  border-radius: 4px;
+  color: var(--paper);
+  font-size: 12px;
+  padding: 6px 10px;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.dojo-input:focus { border-color: var(--steel); }
+.dojo-input::placeholder { color: var(--ash); }
+
+/* ─── Pulse animation ─────────────────────────────────────────────────────── */
+@keyframes pulse-fire {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse-fire { animation: pulse-fire 2s ease infinite; }
+
+/* ─── Loading shimmer ─────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.dojo-shimmer {
+  background: linear-gradient(90deg, var(--floor) 0px, var(--wall) 80px, var(--floor) 160px);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 3px;
+}
