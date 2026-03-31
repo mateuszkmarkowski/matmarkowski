@@ -1,23 +1,21 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Nav from '@/components/site/Nav'
+import Footer from '@/components/site/Footer'
 
 export const metadata: Metadata = {
-  title: 'Mat Markowski',
-  description: 'This is where the dream begins. A space to explore consciousness, study the edge of science, and push limits.',
+  title: { default: 'Mat Markowski', template: '%s · Mat Markowski' },
+  description: 'The best lucid dreaming hub on the internet. Learn to wake up inside your dreams.',
   openGraph: {
     title: 'Mat Markowski',
-    description: 'This is where the dream begins.',
+    description: 'The best lucid dreaming hub on the internet.',
     url: 'https://matmarkowski.com',
     siteName: 'Mat Markowski',
     type: 'website',
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -26,7 +24,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Nav />
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }
